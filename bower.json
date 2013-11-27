@@ -1,0 +1,15 @@
+{
+  "name": "tr-test-task",
+  "version": "0.3.2",
+  "devDependencies": {
+    "angular": "~1.2.1",
+    "angular-mocks": "~1.2.1",
+    "bootstrap": "~2.3.2",
+    "angular-bootstrap": "~0.6.0",
+    "angular-ui-router": "~0.2.0",
+    "angular-ui-utils": "~0.0.4",
+    "angular-scenario": "~1.2.1",
+    "placeholders": "git+https://github.com/Iristyle/bower-angular-placeholders.git#0.0.1"
+  },
+  "dependencies": {}
+}

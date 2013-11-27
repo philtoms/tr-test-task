@@ -1,0 +1,10 @@
+<table>
+  <thead>
+    <th ng-repeat='header in table.headers'><a ng-class='{active:active==$index}' ng-click="sortBy($index,reverse=!reverse)">{{header | titlize}}</a></th>
+  </thead>
+  <tbody>
+    <tr ng-repeat='row in table.rows' ng-class-even="'even'">
+      <td ng-repeat='column in row.columns'>{{column}}</td>
+    </tr>
+  </tbody>
+</table>
