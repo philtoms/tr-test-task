@@ -5,7 +5,7 @@ angular.module( 'trTestTask', [
   'tr.preview',
   'tr.filters',
   'googleSpreadsheet',
-  'highlightOnHover',
+  'eventHandlers',
   'typeSorter',
   'ui.router'
 ])
@@ -24,38 +24,17 @@ angular.module( 'trTestTask', [
 
   // data has come in. Make sure its new data before binding it to scope
   $scope.$on('new gsa data', function(event){
-    sheet.bindData($scope);
+    sheet.bindData($scope, function(row){
+      var change = row.columns[4];
+      change.class = change.value.indexOf('-')<0? "positiveValue":"negativeValue";
+    });
   });
+  $scope.active=0;
   $scope.sortBy = function(index,reverse){
     $scope.active=index;
+    $scope.activeUp=reverse;
     typeSorter($scope.table.rows, index, reverse);
   };
 })
 
-.directive('x-circles', function(){
-
-  function random(limit){
-    return Math.floor(Math.random()*limit+1);
-  }
-
-  function draw(canvas, context){
-    var x = random(canvas.width);
-    var y = random(canvas.height);
-    var radius = random(10);
-
-    context.beginPath();
-    context.arc(x, y, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = '#333';
-    context.fill();
-  }
-
-  return {link:function(){
-      var canvas = document.getElementsByTagName('canvas')[0];
-      var context = canvas.getContext('2d');
-      for (var i=0;i<30;i++){
-        draw(canvas, context);
-      }
-    }
-  };
-})
 ;

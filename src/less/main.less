@@ -1,9 +1,9 @@
 /* variables */
 
-@border:1px solid #cacad2;
 @heading-color:#515151;
 @text-color:#8E979E;
 @selected-color:#DE8801;
+@border:1px solid #cacad2;
 
 /* layout control */
 .pull-left {float:left;}
@@ -31,7 +31,7 @@ html {
 }
 h1 {
   font-family:Cabin Bold,sans-serif;
-  font-size:13px;
+  font-size:12px;
 }
 h2 {
   font-family:Cabin Bold,sans-serif;
@@ -60,10 +60,9 @@ a {
 
 #main-wrap,
 nav,
-table,
-tbody,
-tr,
-input {
+input,
+#container-wrap
+ {
     border-radius: 3px;
 }
 
@@ -82,7 +81,7 @@ canvas {
   margin: auto;
 
   width:1045px;
-  height: 495px;
+  height: 498px;
   background-color:#E0EDF3;
   border-radius: 5px;
   padding: 5px;
@@ -92,12 +91,14 @@ canvas {
   background-color:white;
   border: @border;
   padding:15px;
+  margin:0px -1px 0 -1px;
 }
 
 h1 {
   color:@heading-color;
   border-bottom:@border;
-  margin: 0 0 3px 0;
+  margin: 3px -5px;
+  padding: 0 0 4px 10px;
 }
 nav {
   border:@border;
@@ -151,6 +152,10 @@ header a:first-of-type {border-right:@border;}
 header input {
   width:200px;
   padding:5px;
+  padding-left: 25px;
+  border: @border;
+  background-image:url(input.png);
+  background-color:#fafafa;
 }
 
 #container {
@@ -158,6 +163,7 @@ header input {
   width:1028px;
   overflow-y:scroll;
   overflow-x:hidden;
+  margin: -1px 0 1px 0;
 }
 
 #container-wrap {
@@ -173,18 +179,15 @@ table {
   border-collapse:collapse;
 }
 
-#data {
-  border:@border;
-}
-
+#data thead {border-bottom:@border;}
 #data th {
-  background-image: linear-gradient(to bottom, #E9F0F6 20%, #E2EDF6 66%, #D9F1F2 81%);
+  background-image: linear-gradient(to bottom, rgba(225,236,244,0), rgba(225,236,244,1));
 }
-#data thead {border:@border;}
 #data th, td {
   text-align:right;
-  padding: 5px;
+  padding: 8px 5px;
 }
+#data th a {margin-right:-15px;}
 
 #data th:nth-of-type(1),
 #data th:nth-of-type(2), 
@@ -193,7 +196,14 @@ table {
   text-align:left;
 }
 
+th a {padding-right:15px;}
 
+.active {background-position-x:100%;background-repeat:no-repeat;}
+.active.up {background-image:url(sortUp.png);background-position: 100% 2px;}
+.active.down {background-image:url(sortDown.png);background-position:100% 4px;}
+
+.negativeValue {color:red;}
+.positiveValue {color:green;}
 
 .highlight {background-color:#D4E8FA !important;}
 .even {background-color:#F8F8F8;}

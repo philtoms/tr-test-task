@@ -10,7 +10,7 @@ angular.module('typeSorter', [])
         't':typeof v
       };
       if (type.t == 'string'){
-        var n = parseInt(v.replace(/,/g,''),10);
+        var n = parseFloat(v.replace(/,/g,'').replace(/%/,''),10);
         if(!isNaN(n)){
           type.v = n;
         }
@@ -30,8 +30,8 @@ angular.module('typeSorter', [])
 
     function typeSort(v1,v2){
 
-      v1 = v1.columns[index];
-      v2 = v2.columns[index];
+      v1 = v1.columns[index].value;
+      v2 = v2.columns[index].value;
 
       var result;
       var t1 = toType(v1);

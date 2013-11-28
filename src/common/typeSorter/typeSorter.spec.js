@@ -3,7 +3,7 @@ describe('typeSorter', function() {
   function buildData(){
     var data= [];
     for(var i=0; i< arguments.length; i++){
-      data.push({columns:[arguments[i]]});
+      data.push({columns:[{value:arguments[i]}]});
     }
     return data;
   } 
@@ -33,10 +33,18 @@ describe('typeSorter', function() {
   });
 
   it ('should reverse sort formatted numbers', function(){
-    var unsorted = buildData('-3,000','101',2);
-    var sorted = buildData('101',2,'-3,000');
+    var unsorted = buildData('-3,000','101.7',2);
+    var sorted = buildData('101.7',2,'-3,000');
 
     typeSorter(unsorted,0,true);
+    expect(unsorted).toEqual(sorted);
+  });
+
+  it ('should sort trailing alpha numbers', function(){
+    var unsorted = buildData('3%','-1.4%','1.4%', '1.2%');
+    var sorted = buildData('-1.4%','1.2%','1.4%','3%');
+
+    typeSorter(unsorted,0,false);
     expect(unsorted).toEqual(sorted);
   });
 
