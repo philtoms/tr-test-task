@@ -74,6 +74,7 @@ angular.module('googleSpreadsheet',[])
 
     var data;
     this.bindData = function(scope) {
+      var updated;
       if (!scope.table){
         scope.table = new TableDataContract();
         scope.table.headers = data.headers;
@@ -85,11 +86,13 @@ angular.module('googleSpreadsheet',[])
         if (table.index[row.id]){
           if (table.index[row.id].updated!=row.updated) {
             angular.extend(table.index[row.id],row);
+            updated=true;
           }
         }
         else {
           table.rows.push(row);
           table.index[row.id]=row;
+          updated=true;
         }
       });
 
@@ -99,6 +102,7 @@ angular.module('googleSpreadsheet',[])
           delete table.index[row.id];
           var rowIndex = table.rows.indexOf(row);
           table.rows.splice(rowIndex,1);
+          updated=true;
         }
       });
       if (updated){

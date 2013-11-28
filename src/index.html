@@ -3,9 +3,6 @@
   <head>
     <title>DataGrid Control Panel</title>
 
-    <!-- font awesome from BootstrapCDN -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
 
@@ -23,7 +20,7 @@
       <h1>DataGrid Control Panel</h1>
 
       <div id='content'>
-        <header>
+        <header class='clearfix'>
           <h2 class='pull-left'>DATA<span>GRID</span></h2>
           <div class='pull-right clearfix'>
             <a href=''>FAQ</a>
@@ -31,18 +28,19 @@
             <input placeholder='Search'>
           </div>
         </header>
-        <nav>
-          <table>
-            <th id='home'><a href='#/home'><i class="icon-home"></i></a></th>
-            <th><a href='#/preview' class='selected'>Preview</a></th>
-            <th><a href='#/activity'>Activity</a></th>
-            <th><a href='#/control'>Control</a></th>
-            <th><a href='#/issue'>Issue</a></th>
-            <th><a href='#/overview'>Overview</a></th>
-            <th><div></div></th>
-            <th><a href='#/profile'>My Profile</a></th>
-            <th><a href='#/admin'>Admin</a></th>
-          </table>
+        <nav class='clearfix'>
+          <div class='pull-left'>
+            <a class='home' href='#/home'><img ng-src='assets/home.png' class="icon-home"></a>
+            <a class='preview selected' href='#/preview'>Preview</a>
+            <a class='activity' href='#/activity'>Activity</a>
+            <a class='control' href='#/control'>Control</a>
+            <a class='issue' href='#/issue'>Issue</a>
+            <a class='overview' href='#/overview'>Overview</a>
+          </div>
+          <div class='pull-right'>
+            <a class='my-profile' href='#/profile'>My Profile</a>
+            <a class='admin' href='#/admin'>Admin</a>
+          </div>
         </nav>
         <div id='container-wrap' scrollbar-on-hover>
           <google-spreadsheet highlight-on-hover id='data'></google-spreadsheet>

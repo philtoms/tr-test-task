@@ -1,4 +1,3 @@
-
 angular.module( 'trTestTask', [
   'templates-app',
   'templates-common',
@@ -16,6 +15,8 @@ angular.module( 'trTestTask', [
 })
 
 .run( function run (  ) {
+  var doc = document.documentElement;
+  doc.setAttribute('data-useragent', navigator.userAgent);
 })
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, GoogleSpreadsheet, typeSorter) {
