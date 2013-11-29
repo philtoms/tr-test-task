@@ -2,25 +2,39 @@ angular.module('eventHandlers',[])
 
 .directive('highlightOnHover', function(){
   var currentFocus=$();
+  var currentFocusAll=$();
+  var curColumnIndex;
   var rows;
+  function clear(elem){
+    if (elem){
+      elem.removeClass('highlight');
+    }
+  }
+  function set(elem){
+    elem.addClass('highlight');
+  }
   return {
     link:function(scope,elem,attr){
       $(elem).on('mouseover','td', function(event){
-        rows = rows || $(elem).find('tbody > tr');
-        if (currentFocus) {
-          currentFocus.removeClass('highlight');
-        }
+        clear(currentFocus);
         currentFocus=$(this).parent();
-
         var index = $(this).prevAll().length;  
-        var columns = rows.find(':nth-child(' + (index + 1) + ')');
-        currentFocus = currentFocus.add(columns);
-        currentFocus.addClass('highlight');
+        if (index==curColumnIndex){
+          set(currentFocus);
+        }
+        else {
+          clear(currentFocusAll);
+          rows = rows || $(elem).find('tbody > tr');
+          var columns = rows.find(':nth-child(' + (index + 1) + ')');
+          currentFocusAll = currentFocus.add(columns);
+          set(currentFocusAll);
+        }
+      });
+      $(elem).on('mouseleave', function(event){
+        clear(currentFocusAll);
       });
       scope.$on('gsa data updated', function(){
-        if (currentFocus){
-          currentFocus.removeClass('highlight');
-        }
+        clear(currentFocusAll);
         currentFocus=null;
       });
     }
@@ -35,7 +49,7 @@ angular.module('eventHandlers',[])
     link:function(scope,elem,attr){
       width = width || $(elem).width();
       $(elem).on('mouseover', function(event){
-        if (event.clientX > 1295){
+        if (!$(event.target).prevAll().length){
           $(elem).width(width+16);
         }
         else {

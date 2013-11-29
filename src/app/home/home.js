@@ -26,7 +26,8 @@ angular.module( 'tr.home', [
     url: '/home',
     views: {
       "main": {
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+        templateUrl:'home/home.tpl.html'
       }
     }
   });

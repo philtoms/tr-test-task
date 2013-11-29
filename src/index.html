@@ -23,28 +23,26 @@
         <header class='clearfix'>
           <h2 class='pull-left'>DATA<span>GRID</span></h2>
           <div class='pull-right clearfix'>
-            <a href=''>FAQ</a>
-            <a href=''>Help</a>
+            <a ui-sref='faq'>FAQ</a>
+            <a i-sref='help'>Help</a>
             <input placeholder='Search'>
           </div>
         </header>
         <nav class='clearfix'>
           <div class='pull-left'>
-            <a class='home' href='#/home'><img ng-src='assets/home.png' class="icon-home"></a>
-            <a class='preview selected' href='#/preview'>Preview</a>
-            <a class='activity' href='#/activity'>Activity</a>
-            <a class='control' href='#/control'>Control</a>
-            <a class='issue' href='#/issue'>Issue</a>
-            <a class='overview' href='#/overview'>Overview</a>
+            <a class='home' ui-sref='home'><img ng-src='assets/home.png' class="icon-home"></a>
+            <a class='preview selected' ui-sref='preview'>Preview</a>
+            <a class='activity' ui-sref='activity'>Activity</a>
+            <a class='control' ui-sref='control'>Control</a>
+            <a class='issue' ui-sref='issue'>Issue</a>
+            <a class='overview' ui-sref='overview'>Overview</a>
           </div>
           <div class='pull-right'>
-            <a class='my-profile' href='#/profile'>My Profile</a>
-            <a class='admin' href='#/admin'>Admin</a>
+            <a class='my-profile' ui-sref='profile'>My Profile</a>
+            <a class='admin' ui-sref='admin'>Admin</a>
           </div>
         </nav>
-        <div id='container-wrap' scrollbar-on-hover>
-          <google-spreadsheet highlight-on-hover id='data'></google-spreadsheet>
-        </div>
+        <div ui-view='main'></div>
       </div>
     </div>
   </body>

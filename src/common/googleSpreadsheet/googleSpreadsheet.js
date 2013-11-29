@@ -34,10 +34,9 @@ angular.module('googleSpreadsheet',[])
 
 .factory ('gsMapper', function (TableDataContract) {
 
-  return function(feedData, specialCase){
+  return function(data, specialCase){
     var propertyKeys = [];
     var tableData = new TableDataContract();
-    var data = angular.fromJson(feedData.substr(18,feedData.length-20)).feed.entry;
 
     // ceate the header from row 0
     for (var key in data[0]) {
@@ -71,11 +70,13 @@ angular.module('googleSpreadsheet',[])
 
 .factory('GoogleSpreadsheet', function($http, $rootScope, gsNotifier, gsMapper, TableDataContract){
 
-  var feedUrl = 'https://spreadsheets.google.com/feeds/{type}/{key}/od6/public/values?alt=json-in-script&callback=x';
+  var feedUrl = 'https://spreadsheets.google.com/feeds/{type}/{key}/od6/public/values?alt=json-in-script&callback=JSON_CALLBACK';
 
   return function(key,type) {
 
     var data;
+    var url = feedUrl.replace(/{key}/,key).replace(/{type}/,type);
+
     this.bindData = function(scope, cb) {
       var updated;
       if (!scope.table){
@@ -123,14 +124,12 @@ angular.module('googleSpreadsheet',[])
     });
 
     function getData(){
-    var url = feedUrl.replace(/{key}/,key).replace(/{type}/,type);
-      $http.get(url).then(
+      $http.jsonp(url).then(
         function(response) {
-          data = gsMapper(response.data, {'gsx$marketcap':'Market Cap'});
+          data = gsMapper(response.data.feed.entry, {'gsx$marketcap':'Market Cap'});
           $rootScope.$broadcast('new gsa data', data);
         },
         function(error) {
-          deferred.reject('');
         });
     }
   };
